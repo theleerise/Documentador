@@ -128,7 +128,7 @@ class VentanaPrincipal(QMainWindow):
     ##################################
     def animate_button_press(self, button):
         anim = QPropertyAnimation(button, b"geometry")
-        anim.setDuration(100)
+        anim.setDuration(50)
         original_geometry = button.geometry()
         pressed_geometry = QRect(original_geometry.left(), original_geometry.top()+1.5,
                                  original_geometry.width(), original_geometry.height())
@@ -140,7 +140,7 @@ class VentanaPrincipal(QMainWindow):
 
     def animate_button_release(self, button):
         anim = QPropertyAnimation(button, b"geometry")
-        anim.setDuration(100)
+        anim.setDuration(50)
         pressed_geometry = button.geometry()
         original_geometry = QRect(pressed_geometry.left(), pressed_geometry.top()-1,
                               pressed_geometry.width(), pressed_geometry.height())
