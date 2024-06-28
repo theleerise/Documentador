@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QMainWindow, QApplication, QWidget, QHBoxLayout, Q
 '''Librerias Propias'''
 from componentes import CajaDeTexto, Color, EtiquetaStilo1, CajaDeColores, FramePantalla, BotonDcho
 from valores_precargados import ColoresRgb, ValoresFrameCSS, ColoresHEX
-from funcionalidades import Utilidades as UTIL
+from funcionalidad import Utilidades as UTIL
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
