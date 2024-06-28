@@ -130,7 +130,7 @@ class VentanaPrincipal(QMainWindow):
         anim = QPropertyAnimation(button, b"geometry")
         anim.setDuration(100)
         original_geometry = button.geometry()
-        pressed_geometry = QRect(original_geometry.left(), original_geometry.top() + 4,
+        pressed_geometry = QRect(original_geometry.left(), original_geometry.top()+1.5,
                                  original_geometry.width(), original_geometry.height())
         anim.setStartValue(original_geometry)
         anim.setEndValue(pressed_geometry)
@@ -142,7 +142,7 @@ class VentanaPrincipal(QMainWindow):
         anim = QPropertyAnimation(button, b"geometry")
         anim.setDuration(100)
         pressed_geometry = button.geometry()
-        original_geometry = QRect(pressed_geometry.left(), pressed_geometry.top() - 4,
+        original_geometry = QRect(pressed_geometry.left(), pressed_geometry.top()-1,
                               pressed_geometry.width(), pressed_geometry.height())
         anim.setStartValue(pressed_geometry)
         anim.setEndValue(original_geometry)
