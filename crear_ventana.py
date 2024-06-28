@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize
+from PySide6.QtCore import QSize, QPropertyAnimation, QRect, QEasingCurve
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow, QApplication, QWidget, QHBoxLayout, QVBoxLayout, QTextEdit, QLabel, \
     QPushButton, QLayout, QFrame
@@ -53,16 +53,22 @@ class VentanaPrincipal(QMainWindow):
         self.boton_gen_sql.setFixedSize(200, 50)
         #self.boton_gen_sql.clicked.connect(UTIL.prueba_boton)
         self.boton_gen_sql.clicked.connect(self.generar_sql)
+        self.boton_gen_sql.pressed.connect(lambda: self.animate_button_press(self.boton_gen_sql))
+        self.boton_gen_sql.released.connect(lambda: self.animate_button_release(self.boton_gen_sql))
         self.lay_dho.addWidget(self.boton_gen_sql)
 
         self.boton_gen_campos = BotonDcho("Generar Campos")
         self.boton_gen_campos.setFixedSize(200, 50)
         #self.boton_gen_campos.clicked.connect(UTIL.prueba_boton)
+        self.boton_gen_campos.pressed.connect(lambda: self.animate_button_press(self.boton_gen_campos))
+        self.boton_gen_campos.released.connect(lambda: self.animate_button_release(self.boton_gen_campos))
         self.boton_gen_campos.clicked.connect(self.generar_campos)
         self.lay_dho.addWidget(self.boton_gen_campos)
 
         self.boton_gen_numero = BotonDcho("Generar Letra-Num")
         self.boton_gen_numero.setFixedSize(200, 50)
+        self.boton_gen_numero.pressed.connect(lambda: self.animate_button_press(self.boton_gen_numero))
+        self.boton_gen_numero.released.connect(lambda: self.animate_button_release(self.boton_gen_numero))
         self.boton_gen_numero.clicked.connect(self.numerar_campos)
         self.lay_dho.addWidget(self.boton_gen_numero)
 
@@ -116,6 +122,33 @@ class VentanaPrincipal(QMainWindow):
         lineas = self.contenido_caja
         UTIL.func_letra_campo(lineas)
         self.contenido_caja = ''
+
+    ##################################
+    #ºººººººººAnimacionesºººººººººººº#
+    ##################################
+    def animate_button_press(self, button):
+        anim = QPropertyAnimation(button, b"geometry")
+        anim.setDuration(100)
+        original_geometry = button.geometry()
+        pressed_geometry = QRect(original_geometry.left(), original_geometry.top() + 4,
+                                 original_geometry.width(), original_geometry.height())
+        anim.setStartValue(original_geometry)
+        anim.setEndValue(pressed_geometry)
+        anim.setEasingCurve(QEasingCurve.OutQuad)
+        anim.start()
+        button.anim = anim
+
+    def animate_button_release(self, button):
+        anim = QPropertyAnimation(button, b"geometry")
+        anim.setDuration(100)
+        pressed_geometry = button.geometry()
+        original_geometry = QRect(pressed_geometry.left(), pressed_geometry.top() - 4,
+                              pressed_geometry.width(), pressed_geometry.height())
+        anim.setStartValue(pressed_geometry)
+        anim.setEndValue(original_geometry)
+        anim.setEasingCurve(QEasingCurve.OutQuad)
+        anim.start()
+        button.anim = anim
 
 
 if __name__ == '__main__':
