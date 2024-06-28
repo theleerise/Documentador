@@ -55,8 +55,7 @@ class EtiquetaStilo1(QLabel):
     def __init__(self, texto, alinecion, fuente_text, color_etiqueta):
         super().__init__()
         #color de la estiqueta
-        r, g, b = color_etiqueta
-        self.setStyleSheet(f"background-color: rgb({r},{g},{b});"
+        self.setStyleSheet(f"background-color: {color_etiqueta};"
                            f"border-radius: 20%")
 
         #Texto de la Etiqueta
@@ -65,11 +64,12 @@ class EtiquetaStilo1(QLabel):
         self.setFont(QFont(fuente_text, 20))
 
         def valida_alineacion(tipo):
-            if tipo == "CENTER":
+            tipoUP = tipo.upper()
+            if tipoUP == "CENTER":
                 return self.setAlignment(Qt.AlignCenter)
-            elif tipo == "IZQ":
+            elif tipoUP == "IZQ":
                 return self.setAlignment(Qt.AlignLeft)
-            elif tipo == "JUSTIFICADO":
+            elif tipoUP == "JUSTIFICADO":
                 return self.setAlignment(Qt.AlignJustify)
             else:
                 return self.setAlignment(Qt.AlignRight)
@@ -91,7 +91,7 @@ class BotonDcho(QPushButton):
         self.setStyleSheet(f"border-style: solid;"
                            f"border-width: 3px;"
                            f"border-color: {ColoresHEX.COLOR7};"
-                           f"background-color: rgb({R2},{G2},{B2});"
+                           f"background-color: {ColoresHEX.COLOR14};"
                            f"color: {ColoresHEX.COLOR5};"
                            f"border-radius: 8px;")
         self.setText(texto_boton)
