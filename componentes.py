@@ -2,7 +2,7 @@ from PySide6 import QtGui
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction, QIcon, QPalette, QColor, QFont
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QMenu, QHBoxLayout, QVBoxLayout, QWidget, QTextEdit, \
-    QSizePolicy, QFrame, QPushButton
+    QSizePolicy, QFrame, QPushButton, QLineEdit
 
 from valores_precargados import ColoresRgb, ColoresHEX
 
@@ -97,5 +97,22 @@ class BotonDcho(QPushButton):
         self.setText(texto_boton)
         self.setFont(QFont('Arial', 16, QFont.Bold))
 
+class LineaEntrada(QLineEdit):
+    def __init__(self):
+        super().__init__()
+        r, g, b = ColoresRgb.COLOR10
+        self.setStyleSheet(f"background-color: rgb({r},{g},{b});"
+                           f"border-radius: 5%")
 
+class BotonEntrada(QPushButton):
+    def __init__(self, texto_boton):
+        super().__init__()
+        self.setStyleSheet(f"border-style: solid;"
+                           f"border-width: 3px;"
+                           f"border-color: {ColoresHEX.COLOR7};"
+                           f"background-color: {ColoresHEX.COLOR14};"
+                           f"color: {ColoresHEX.COLOR5};"
+                           f"border-radius: 8px;")
+        self.setText(texto_boton)
+        self.setFont(QFont('Arial', 12, QFont.Bold))
 
