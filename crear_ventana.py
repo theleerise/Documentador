@@ -1,12 +1,13 @@
 from PySide6.QtCore import QSize, QPropertyAnimation, QRect, QEasingCurve
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow, QApplication, QWidget, QHBoxLayout, QVBoxLayout, QTextEdit, QLabel, \
-    QPushButton, QLayout, QFrame
+    QPushButton, QLayout, QFrame, QLineEdit, QSizePolicy
 
 '''Librerias Propias'''
-from componentes import CajaDeTexto, Color, EtiquetaStilo1, CajaDeColores, FramePantalla, BotonDcho
+from componentes import CajaDeTexto, Color, EtiquetaStilo1, CajaDeColores, FramePantalla, BotonDcho, LineaEntrada, \
+    BotonEntrada
 from valores_precargados import ColoresRgb, ValoresFrameCSS, ColoresHEX
-from funcionalidad import Utilidades as UTIL
+from funcionalidades import Utilidades as UTIL
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
@@ -90,8 +91,19 @@ class VentanaPrincipal(QMainWindow):
         self.lay_izq.addLayout(self.lay_izq_2)
 
         #FUNCIONALIDAD
+        self.entrada_comandos = LineaEntrada()
+        self.entrada_comandos.setFixedHeight(35)
+        self.entrada_comandos.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        self.entrada_comandos.setMaximumSize(1000, 800)
+        self.lay_izq_1.addWidget(self.entrada_comandos)
+        self.boton_comando = BotonEntrada("Lanzar Comando")
+        self.boton_comando.setFixedSize(140, 35)
+        self.lay_izq_1.addWidget(self.boton_comando)
+
+
         self.caja = CajaDeTexto()
         self.lay_izq_2.addWidget(self.caja)
+
 
         #PUBLICACION
         self.layout_principal.addLayout(self.lay_izq)
